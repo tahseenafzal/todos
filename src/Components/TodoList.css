@@ -1,0 +1,9 @@
+.Todolist-ItemChecked{
+   text-decoration: line-through;
+}
+
+#title{
+   text-align: left;
+   display: flex;
+   width: 80%;
+}
