@@ -4,7 +4,6 @@ import './TodoList.css'
 class TodoItem extends Component {
   render() {
     const { title, handleDelete, handleEdit, handleChecked, checkedItem, id } = this.props;
-    console.log(checkedItem);
 
     return (
       <li className='list-group-item text-capitalize d-flex justify-content-between my-2'>

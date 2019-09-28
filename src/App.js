@@ -99,13 +99,13 @@ class App extends Component {
 
   }
 
-  SAFE_componentWillMount(){
+  UNSAFE_componentWillMount(){
     localStorage.getItem('todos') && this.setState({
       items: JSON.parse(localStorage.getItem('todos'))
-    })
+    })   
   }
 
-  SAFE_componentWillUpdate(nextProps, nextState) {
+  UNSAFE_componentWillUpdate(nextProps, nextState) {
     localStorage.setItem('todos', JSON.stringify(nextState.items));
   }
 
