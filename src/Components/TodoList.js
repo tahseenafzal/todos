@@ -4,7 +4,7 @@ import TodoItem from './TodoItem';
 class TodoList extends Component {
 
   render() {
-    const { items, clearList, handleDelete, handleEdit, handleChecked, checkedItem, id } = this.props;
+    const { items, clearList, handleDelete, handleEdit, handleChecked } = this.props;
     return (
       <ul className='list-group my-5'>
         <h3 className='text-capitalize text-center'>todo list</h3>
@@ -15,9 +15,8 @@ class TodoList extends Component {
               title={item.title}
               handleDelete={() => handleDelete(item.id)}
               handleEdit={() => handleEdit(item.id)}
-              handleChecked={handleChecked}
-              checkedItem={checkedItem}
-              id={id}
+              handleChecked={(e) => handleChecked(e, item.id)}
+              checkedItem={item.checkedItem}
             />;
           })
         }

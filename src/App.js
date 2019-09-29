@@ -8,13 +8,15 @@ import uuid from 'uuid';
 
 class App extends Component {
 
-  state = {
-    items: [],
-    id: uuid(),
-    item: '',
-    editItem: false,
-    checkedItem: false
-  }
+    state = {
+      items: [],
+      id: uuid(),
+      item: '',
+      editItem: false,
+      checkedItem: false
+    }
+
+  
 
   handleChange = (e) => {
     this.setState({
@@ -65,11 +67,11 @@ class App extends Component {
 
   }
 
-  handleEdit = (id, e) => {
+  handleEdit = (e, id) => {
     
     const index = this.state.items.findIndex((item) => {
-      return item.id = id;
-    });
+       return item.id = id
+     });
 
     const todosItems = Object.assign([], this.state.items)
 
@@ -81,15 +83,22 @@ class App extends Component {
 
   }
 
-  handleChecked = (index, e) => {
+  handleChecked = (e, id) => {
 
     const i = this.state.items.findIndex((item) => {
-      return item.id = index 
+      return item.id = id  
     })
 
-    const newState = Object.assign([], this.state)
+    const newItems = Object.assign([], this.state.items)
 
-    console.log(newState);
+    newItems[i].checkedItem = e.target.checked
+
+    console.log(newItems)
+    
+    this.setState({
+      items: newItems
+    })
+    // console.log(newState);
 
     // const newState[i].checkedItem = e.target.checked
 
@@ -127,8 +136,6 @@ class App extends Component {
               handleDelete={this.handleDelete}
               handleEdit={this.handleEdit}
               handleChecked={this.handleChecked}
-              checkedItem={this.state.checkedItem}
-              id = {this.state.id}
             />
           </div>
         </div>

@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import './TodoList.css'
 
 class TodoItem extends Component {
+
   render() {
-    const { title, handleDelete, handleEdit, handleChecked, checkedItem, id } = this.props;
+    const { title, handleDelete, handleEdit, handleChecked, checkedItem } = this.props;
 
     return (
       <li className='list-group-item text-capitalize d-flex justify-content-between my-2'>
         <span width='20px'>
           <input
-            id={id}
+            // id={id}
             type='checkbox'
-            onChange={handleChecked}
+            onClick={handleChecked}
             checked={checkedItem}
           />
         </span>
