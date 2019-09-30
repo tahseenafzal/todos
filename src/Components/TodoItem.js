@@ -12,7 +12,7 @@ class TodoItem extends Component {
           <input
             // id={id}
             type='checkbox'
-            onClick={handleChecked}
+            onChange={handleChecked}
             checked={checkedItem}
           />
         </span>

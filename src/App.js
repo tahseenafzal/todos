@@ -70,15 +70,15 @@ class App extends Component {
   handleEdit = (e, id) => {
     
     const index = this.state.items.findIndex((item) => {
-       return item.id = id
+       return item.id === id
      });
 
-    const todosItems = Object.assign([], this.state.items)
+    // const todosItems = Object.assign([], this.state.items)
 
-    todosItems[index].item = e.target.value;
+    // todosItems[index].item = e.target.value;
 
     this.setState({
-      items: todosItems
+      item: this.state.items[index].item
     })
 
   }
@@ -86,26 +86,16 @@ class App extends Component {
   handleChecked = (e, id) => {
 
     const i = this.state.items.findIndex((item) => {
-      return item.id = id  
+      return item.id === id  
     })
 
     const newItems = Object.assign([], this.state.items)
 
     newItems[i].checkedItem = e.target.checked
-
-    console.log(newItems)
     
     this.setState({
       items: newItems
     })
-    // console.log(newState);
-
-    // const newState[i].checkedItem = e.target.checked
-
-    // this.setState({
-    //   // checkedItem: checkVal
-    // })
-
   }
 
   UNSAFE_componentWillMount(){

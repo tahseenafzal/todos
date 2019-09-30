@@ -14,7 +14,7 @@ class TodoList extends Component {
               key={item.id}
               title={item.title}
               handleDelete={() => handleDelete(item.id)}
-              handleEdit={() => handleEdit(item.id)}
+              handleEdit={(e) => handleEdit(e, item.id)}
               handleChecked={(e) => handleChecked(e, item.id)}
               checkedItem={item.checkedItem}
             />;
