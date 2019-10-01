@@ -8,15 +8,13 @@ import uuid from 'uuid';
 
 class App extends Component {
 
-    state = {
-      items: [],
-      id: uuid(),
-      item: '',
-      editItem: false,
-      checkedItem: false
-    }
-
-  
+  state = {
+    items: [],
+    id: uuid(),
+    item: '',
+    editItem: '',
+    checkedItem: false
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -28,24 +26,43 @@ class App extends Component {
 
     e.preventDefault();
 
-    const newItem = {
-      id: this.state.id,
-      title: this.state.item,
-      editItem: this.state.editItem,
-      checkedItem: this.state.checkedItem
+    if (this.state.editItem !== '') {
+
+      const i = this.state.items.findIndex((item) => {
+        return item.id === this.state.editItem
+      })
+
+      const newList = Object.assign([], this.state.items);
+
+      newList[i].title = this.state.item
+      
+      this.setState({
+        items: newList,
+        item: '',
+        editItem: '',
+        checkedItem: false
+      })
+
+    } else {
+      const newItem = {
+        id: this.state.id,
+        title: this.state.item,
+        editItem: '',
+        checkedItem: false
+      }
+
+      const updateItems = [...this.state.items, newItem];
+
+      this.setState({
+        items: updateItems,
+        item: '',
+        id: uuid(),
+        editItem: '',
+        checkedItem: false
+      });
+
     }
 
-    const updateItems = [...this.state.items, newItem];
-
-    this.setState({
-      items: updateItems,
-      item: '',
-      id: uuid(),
-      editItem: false,
-      checkedItem: false
-    });
-
-    console.log(this.state);
 
   }
 
@@ -55,11 +72,15 @@ class App extends Component {
     })
   }
 
-  handleDelete = (index, e) => {
-    
+  handleDelete = (id) => {
+
+    const i = this.state.items.findIndex((item) => {
+      return item.id === id
+    })
+
     const todosnew = Object.assign([], this.state.items);
-    
-    todosnew.splice(index,1);
+
+    todosnew.splice(i, 1);
 
     this.setState({
       items: todosnew
@@ -67,18 +88,21 @@ class App extends Component {
 
   }
 
-  handleEdit = (e, id) => {
-    
+  handleEdit = (id) => {
+
     const index = this.state.items.findIndex((item) => {
-       return item.id === id
-     });
+      return item.id === id
+    });
 
-    // const todosItems = Object.assign([], this.state.items)
+    // console.log(this.state.items)
 
-    // todosItems[index].item = e.target.value;
+    // const newItem = this.state.items[index].title
+
+    // console.log(newItem)
 
     this.setState({
-      item: this.state.items[index].item
+      item: this.state.items[index].title,
+      editItem: id
     })
 
   }
@@ -86,22 +110,22 @@ class App extends Component {
   handleChecked = (e, id) => {
 
     const i = this.state.items.findIndex((item) => {
-      return item.id === id  
+      return item.id === id
     })
 
     const newItems = Object.assign([], this.state.items)
 
     newItems[i].checkedItem = e.target.checked
-    
+
     this.setState({
       items: newItems
     })
   }
 
-  UNSAFE_componentWillMount(){
+  UNSAFE_componentWillMount() {
     localStorage.getItem('todos') && this.setState({
       items: JSON.parse(localStorage.getItem('todos'))
-    })   
+    })
   }
 
   UNSAFE_componentWillUpdate(nextProps, nextState) {
